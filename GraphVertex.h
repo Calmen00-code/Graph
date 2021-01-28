@@ -11,6 +11,7 @@ typedef struct GraphVertex
     LinkedList *adjList;
     char label[STR_LEN];
     void *value;
+    char type;
     int visited;
 } GraphVertex; 
 

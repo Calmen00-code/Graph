@@ -1,6 +1,24 @@
 #include <stdio.h>
 #include "print.h"
 
+printFunc getFunc( char type )
+{
+    printFunc printPtr;
+
+    if ( type == 'c' )
+        printPtr = &printCharacter;
+    else if ( type == 's' )
+        printPtr = &printString;
+    else if ( type == 'i' )
+        printPtr = &printInteger;
+    else if ( type == 'd' )
+        printPtr = &printDouble;
+    else if ( type == 'f' )
+        printPtr = &printFloat;
+
+    return printPtr;
+}
+
 void printString( void *data )
 {
     char *str = (char *)data;

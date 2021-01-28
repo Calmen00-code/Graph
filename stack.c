@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
+#include "header.h"
 
 LinkedList* createStack()
 {
@@ -8,10 +9,10 @@ LinkedList* createStack()
     return stack;
 }
 
-void push( LinkedList *stack, void *data )
+void push( LinkedList *stack, void *data, char dataType )
 {
     if( stack != NULL )
-        insertStart( stack, data );
+        insertStart( stack, data, dataType );
 }
 
 void* top( LinkedList *stack )
@@ -28,7 +29,7 @@ void* pop( LinkedList *stack )
     return data;
 }
 
-int isEmpty( LinkedList *queue )
+int isStackEmpty( LinkedList *queue )
 {
     int empty = FALSE;
     if( queue->head == NULL )

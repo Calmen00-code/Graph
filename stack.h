@@ -4,10 +4,10 @@
 #include "LinkedList.h"
 
 LinkedList *createStack();
-void push( LinkedList *, void * );
+void push( LinkedList *, void *, char );
 void *top( LinkedList * );
 void *pop( LinkedList * );
-int isEmpty( LinkedList * );
+int isStackEmpty( LinkedList * );
 void freeStack( LinkedList * );
 
 #endif
