@@ -2,6 +2,7 @@
 #include "Graph.h"
 #include "print.h"
 #include "header.h"
+#include "file.h"
 #define GRN "\033[0;32m"
 #define RED "\033[0;31m"
 #define RESET "\033[0m"
@@ -324,6 +325,25 @@ int main(int argc, char *argv[])
     printf("graph_3: ");
     dfs( graph_3 ); 
     freeGraph( graph_3 );
+
+/* ====================================================== */
+    printf("\n======================================\n");
+    printf("TEST Read Graph From File: \n\n");
+    printf("graph_1.txt:\n");
+    graph = readGraph( "graph_1.txt" ); 
+
+    printf("BFS: ");
+    bfs( graph );
+
+    printf("DFS: ");
+    dfs( graph );
+    
+    
+    freeReadGraph( graph );
+
+    graph = readGraph( "graph_2.txt" );
+    dfs( graph );
+    freeReadGraph( graph );
 
     return 0;
 }

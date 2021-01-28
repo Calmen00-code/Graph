@@ -22,6 +22,7 @@ void printAdjList( LinkedList* );
 void displayAsList();
 void displayAsMatrix();
 void freeGraph( Graph* );
+void freeReadGraph( Graph* );
 void bfs( Graph* );
 void dfs( Graph* );
 int hasNewVertex( LinkedList * );

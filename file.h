@@ -1,6 +1,7 @@
 #ifndef FILE_H
 #define FILE_H
+#include "Graph.h"
 
-Graph* readGraph( FILE* );
+Graph* readGraph( char[] );
 
 #endif

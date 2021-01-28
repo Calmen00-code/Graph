@@ -26,15 +26,19 @@ EXPORT: none
 */
 void addVertex( Graph* graph, char addLabel[], void* addValue, char valueType )
 {
-    GraphVertex *newVertex = malloc(sizeof(GraphVertex));
-    newVertex->adjList = createLinkedList();
-    strcpy(newVertex->label, addLabel);
-    newVertex->value = addValue;
-    newVertex->type = valueType;
-    newVertex->visited = FALSE;
+    GraphVertex *newVertex = NULL;
 
     if ( hasVertex( graph, addLabel ) == FALSE )
+    {
+        newVertex = malloc(sizeof(GraphVertex));
+        newVertex->adjList = createLinkedList();
+        strcpy(newVertex->label, addLabel);
+        newVertex->value = addValue;
+        newVertex->type = valueType;
+        newVertex->visited = FALSE;
+
         insertLast( graph->vertices, newVertex, valueType );
+    }
     else
         printf("Vertex \"%s\" already exist\n", addLabel);
 }
@@ -166,6 +170,7 @@ EXPORT: none
 */
 void bfs( Graph* graph )
 {
+    printFunc printData;
     GraphVertex *v = NULL; 
     LinkedList *adjList = NULL; 
     LinkedListNode *theNode = NULL, *adjNode = NULL;
@@ -186,7 +191,8 @@ void bfs( Graph* graph )
         {
             if ( v->visited != TRUE )
             {
-                printf("%s ", v->label);
+                printData = getFunc( v->type );
+                (*printData)(v->value);
                 v->visited = TRUE;                      /* Current Vertex is marked as OLD */
                 enqueue( queue, adjNode->data, 'p' );
             }
@@ -205,6 +211,7 @@ EXPORT: none
 */
 void dfs( Graph *graph )
 {
+    printFunc printData;
     GraphVertex *v = NULL;
     LinkedList *stack = createStack(), *adjList = NULL;
     LinkedListNode *theNode = NULL;
@@ -214,7 +221,8 @@ void dfs( Graph *graph )
     push( stack, theNode->data, 'p' );
     v = (GraphVertex *)(theNode->data);
     v->visited = TRUE;
-    printf("%s ", v->label); 
+    printData = getFunc( v->type );
+    (*printData)(v->value);
 
     /* ASSERTION: Iterate until all vertex is VISITED */
     while ( isStackEmpty( stack ) != TRUE )
@@ -225,7 +233,8 @@ void dfs( Graph *graph )
         while ( hasNewVertex( adjList ) == TRUE )
         {
             v = getNewVertex( adjList );
-            printf("%s ", v->label);
+            printData = getFunc( v->type );
+            (*printData)(v->value);
             v->visited = TRUE;
             push( stack, v, 'p' );   /* Store the next vertex into stack */
             adjList = getAdjacent( graph, v->label );   /* Get the next vertex to visit */
@@ -299,7 +308,34 @@ void freeGraph( Graph *graph )
 
         freeNode = theNode;                                /* Assign to freeNode so we can use it theNode */
         theNode = theNode->next;
-        free( freeNode->data ); freeNode->data = NULL;     /* Free the vertex */ 
+        free( freeVertex ); freeVertex = NULL;             /* Free the vertex */ 
+        free( freeNode ); freeNode = NULL;                 /* Free the node that stored the vertex */
+    }
+    free( graph->vertices ); graph->vertices = NULL;
+    free( graph ); graph = NULL;
+}
+
+/*
+FUNCTION: freeReadGraph
+IMPORT: graph (Graph Pointer)
+EXPORT: none
+*/
+void freeReadGraph( Graph *graph )
+{
+    LinkedListNode *theNode = graph->vertices->head, *freeNode = NULL;
+    GraphVertex *freeVertex = NULL;
+
+    while ( theNode != NULL )
+    {
+        freeVertex = ((GraphVertex *)(theNode->data));     /* Get the vertex */
+        freeLinkedList( freeVertex->adjList );             /* Free the adjList of the vertex */
+
+        freeNode = theNode;                                /* Assign to freeNode so we can use it theNode */
+        theNode = theNode->next;
+        freeVertex = (GraphVertex*)(freeNode->data);
+
+        free( freeVertex->value ); freeVertex->value = NULL;
+        free( freeVertex ); freeVertex = NULL;             /* Free the vertex */ 
         free( freeNode ); freeNode = NULL;                 /* Free the node that stored the vertex */
     }
     free( graph->vertices ); graph->vertices = NULL;

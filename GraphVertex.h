@@ -1,15 +1,14 @@
 #ifndef GRAPH_VERTEX
 #define GRAPH_VERTEX
 
-#define STR_LEN 100
-
 #include "Graph.h"
 #include "LinkedList.h"
+#include "header.h"
 
 typedef struct GraphVertex
 {
     LinkedList *adjList;
-    char label[STR_LEN];
+    char label[STR];
     void *value;
     char type;
     int visited;
