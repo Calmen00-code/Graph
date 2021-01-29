@@ -329,20 +329,23 @@ int main(int argc, char *argv[])
 /* ====================================================== */
     printf("\n======================================\n");
     printf("TEST Read Graph From File: \n\n");
-    printf("graph_1.txt:\n");
-    graph = readGraph( "graph_1.txt" ); 
 
+    printf("graph_1.txt:\n");
+    graph = readGraph( "graph_1.txt" );
     printf("BFS: ");
     bfs( graph );
-
     printf("DFS: ");
-    dfs( graph );
-    
-    
+    dfs( graph );    
     freeReadGraph( graph );
 
+    printf("\n");
+
+    printf("graph_2.txt:\n");
     graph = readGraph( "graph_2.txt" );
-    dfs( graph );
+    printf("BFS: ");
+    bfs( graph );
+    printf("DFS: ");
+    dfs( graph );    
     freeReadGraph( graph );
 
     return 0;

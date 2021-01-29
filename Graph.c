@@ -164,6 +164,28 @@ void printAdjList( LinkedList *adjList )
 }
 
 /*
+FUNCTION: setNew
+IMPORT: graph (Graph Pointer)
+EXPORT: none
+*/
+void setNew( Graph *graph )
+{
+    LinkedList *theList = graph->vertices;
+    LinkedListNode *theNode = theList->head;
+    GraphVertex *theVertex = NULL;
+
+    /* ASSERTION: Traverse through all the list to set all to unvisited */
+    while ( theNode != NULL )
+    {
+        /* Set current vertex to FALSE (UNVISITED) */
+        theVertex = (GraphVertex *)(theNode->data);
+        theVertex->visited = FALSE;
+
+        theNode = theNode->next;    /* Traverse to the next node */
+    }
+}
+
+/*
 FUNCTION: bfs
 IMPORT: graph (Graph Pointer)
 EXPORT: none
@@ -172,10 +194,12 @@ void bfs( Graph* graph )
 {
     printFunc printData;
     GraphVertex *v = NULL; 
+    LinkedList *queue = NULL;
     LinkedList *adjList = NULL; 
     LinkedListNode *theNode = NULL, *adjNode = NULL;
 
-    LinkedList *queue = createQueue();    
+    setNew( graph );
+    queue = createQueue();    
     theNode = graph->vertices->head;           /* Traversal will start on the head of vertices */
     enqueue( queue, theNode->data, 'p' ); 
 
@@ -215,6 +239,8 @@ void dfs( Graph *graph )
     GraphVertex *v = NULL;
     LinkedList *stack = createStack(), *adjList = NULL;
     LinkedListNode *theNode = NULL;
+
+    setNew( graph );
 
     /* Every vertex will be stored as stack in DFS */
     theNode = graph->vertices->head;
