@@ -7,7 +7,8 @@
 typedef struct Graph
 {
     LinkedList *vertices;
-    int count;
+    int vertex_count;
+    int edge_count;
 } Graph;
 
 typedef struct GraphVertex

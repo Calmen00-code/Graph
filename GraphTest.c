@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 /* ====================================================== */
 
     printf("\n======================================\n");
-    printf("TEST addVertex:\n\n"); 
+    printf("TEST Add Graph:\n\n"); 
  
     addVertex( graph, "A", &A, 'c' );
     printf("Add A: %sPASSED%s\n", GRN, RESET);
@@ -42,9 +42,8 @@ int main(int argc, char *argv[])
     printf("Add D: %sPASSED%s\n", GRN, RESET);
     addVertex( graph, "E", &E, 'c' );
     printf("Add E: %sPASSED%s\n", GRN, RESET);
-
     printf("Vertex Count: ");
-    if ( graph->count == 5 )
+    if ( graph->vertex_count == 5 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
@@ -56,6 +55,11 @@ int main(int argc, char *argv[])
     addEdge( graph, "B", "C" );
     addEdge( graph, "E", "C" );
     addEdge( graph, "C", "D" );
+    printf("Edge Count: ");
+    if ( graph->edge_count == 7 )
+        printf("%sPASSED%s\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n", RED, RESET);
 
 /* ====================================================== */
 
@@ -75,7 +79,7 @@ int main(int argc, char *argv[])
  
     /* Vertex count should remain the same and no changes are done */
     printf("Vertex Count: ");
-    if ( graph->count == 5 )
+    if ( graph->vertex_count == 5 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
@@ -197,6 +201,11 @@ int main(int argc, char *argv[])
     addVertex( graph, "C", &C, 'c' );
     addVertex( graph, "D", &D, 'c' );
     addVertex( graph, "E", &E, 'c' );
+    printf("Vertex Count: ");
+    if ( graph->vertex_count == 5 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
 
     addEdge( graph, "A", "B" );
     addEdge( graph, "A", "D" );
@@ -205,13 +214,14 @@ int main(int argc, char *argv[])
     addEdge( graph, "B", "C" );
     addEdge( graph, "E", "C" );
     addEdge( graph, "C", "D" );
-    printf("graph: ");
-    bfs( graph );
-    printf("Vertex Count: ");
-    if ( graph->count == 5 )
+    printf("Edge Count: ");
+    if ( graph->edge_count == 7 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
+
+    printf("graph: ");
+    bfs( graph );
 
     freeGraph( graph );
 
@@ -223,6 +233,11 @@ int main(int argc, char *argv[])
     addVertex( graph_2, "E", &E, 'c' );
     addVertex( graph_2, "F", &F, 'c' );
     addVertex( graph_2, "G", &G, 'c' );
+    printf("Vertex Count: ");
+    if ( graph_2->vertex_count == 7 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
 
     addEdge( graph_2, "A", "B" );
     addEdge( graph_2, "A", "C" );
@@ -234,15 +249,14 @@ int main(int argc, char *argv[])
     addEdge( graph_2, "E", "F" );
     addEdge( graph_2, "E", "G" );
     addEdge( graph_2, "F", "G" );
-    printf("graph_2: ");
-    bfs( graph_2 );
-
-    printf("Vertex Count: ");
-    if ( graph_2->count == 7 )
+    printf("Edge Count: ");
+    if ( graph->edge_count == 10 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
 
+    printf("graph_2: ");
+    bfs( graph_2 );
     freeGraph( graph_2 );
 
     graph_3 = createGraph();
@@ -255,6 +269,11 @@ int main(int argc, char *argv[])
     addVertex( graph_3, "G", &G, 'c' );
     addVertex( graph_3, "H", &H, 'c' );
     addVertex( graph_3, "I", &I, 'c' );
+    printf("Vertex Count: ");
+    if ( graph_3->vertex_count == 10 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
     addVertex( graph_3, "J", &J, 'c' );
 
     addEdge( graph_3, "A", "B" );
@@ -272,14 +291,14 @@ int main(int argc, char *argv[])
     addEdge( graph_3, "G", "J" );
     addEdge( graph_3, "H", "J" );
     addEdge( graph_3, "I", "J" );
-    printf("graph_3: ");
-    bfs( graph_3 ); 
-
-    printf("Vertex Count: ");
-    if ( graph_3->count == 10 )
+    printf("Edge Count: ");
+    if ( graph_3->edge_count == 15 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
+
+    printf("graph_3: ");
+    bfs( graph_3 ); 
 
     freeGraph( graph_3 );
 
@@ -293,6 +312,11 @@ int main(int argc, char *argv[])
     addVertex( graph, "C", &C, 'c' );
     addVertex( graph, "D", &D, 'c' );
     addVertex( graph, "E", &E, 'c' );
+    printf("Vertex Count: ");
+    if ( graph->vertex_count == 5 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
 
     addEdge( graph, "A", "B" );
     addEdge( graph, "A", "D" );
@@ -301,14 +325,13 @@ int main(int argc, char *argv[])
     addEdge( graph, "B", "E" );
     addEdge( graph, "C", "D" );
     addEdge( graph, "E", "C" );
-    printf("graph: ");
-    dfs( graph );
-
-    printf("Vertex Count: ");
-    if ( graph->count == 5 )
+    printf("Edge Count: ");
+    if ( graph->edge_count == 7 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
+    printf("graph: ");
+    dfs( graph );
 
     freeGraph( graph );    
 
@@ -320,6 +343,12 @@ int main(int argc, char *argv[])
     addVertex( graph_2, "E", &E, 'c' );
     addVertex( graph_2, "F", &F, 'c' );
     addVertex( graph_2, "G", &G, 'c' );
+    printf("Vertex Count: ");
+    if ( graph_2->vertex_count == 7 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
+
 
     addEdge( graph_2, "A", "B" );
     addEdge( graph_2, "A", "C" );
@@ -331,15 +360,14 @@ int main(int argc, char *argv[])
     addEdge( graph_2, "E", "F" );
     addEdge( graph_2, "E", "G" );
     addEdge( graph_2, "F", "G" );
-    printf("graph_2: ");
-    dfs( graph_2 );
-
-    printf("Vertex Count: ");
-    if ( graph_2->count == 7 )
+    printf("Edge Count: ");
+    if ( graph->edge_count == 10 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
 
+    printf("graph_2: ");
+    dfs( graph_2 );
     freeGraph( graph_2 );
 
     graph_3 = createGraph();
@@ -353,6 +381,11 @@ int main(int argc, char *argv[])
     addVertex( graph_3, "H", &H, 'c' );
     addVertex( graph_3, "I", &I, 'c' );
     addVertex( graph_3, "J", &J, 'c' );
+    printf("Vertex Count: ");
+    if ( graph_3->vertex_count == 10 )
+        printf("%sPASSED%s\n\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n\n", RED, RESET);
 
     addEdge( graph_3, "A", "B" );
     addEdge( graph_3, "A", "C" );
@@ -369,15 +402,14 @@ int main(int argc, char *argv[])
     addEdge( graph_3, "G", "J" );
     addEdge( graph_3, "H", "J" );
     addEdge( graph_3, "I", "J" );
-    printf("graph_3: ");
-    dfs( graph_3 ); 
-
-    printf("Vertex Count: ");
-    if ( graph_3->count == 10 )
+    printf("Edge Count: ");
+    if ( graph_3->edge_count == 15 )
         printf("%sPASSED%s\n\n", GRN, RESET);
     else
         printf("%sFAILED%s\n\n", RED, RESET);
-    
+
+    printf("graph_3: ");
+    dfs( graph_3 ); 
     freeGraph( graph_3 );
 
 /* ====================================================== */
@@ -387,10 +419,17 @@ int main(int argc, char *argv[])
     printf("graph_1.txt:\n");
     graph = readGraph( "graph_1.txt" );
     printf("Vertex Count: ");
-    if ( graph->count == 5 )
+    if ( graph->vertex_count == 5 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
+
+    printf("Edge Count: ");
+    if ( graph->edge_count == 7 )
+        printf("%sPASSED%s\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n", RED, RESET);
+    printf("%d\n", graph->edge_count);
 
     printf("BFS: ");
     bfs( graph );
@@ -404,7 +443,13 @@ int main(int argc, char *argv[])
     graph = readGraph( "graph_2.txt" );
 
     printf("Vertex Count: ");
-    if ( graph->count == 7 )
+    if ( graph->vertex_count == 7 )
+        printf("%sPASSED%s\n", GRN, RESET);
+    else
+        printf("%sFAILED%s\n", RED, RESET);
+
+    printf("Edge Count: ");
+    if ( graph->edge_count == 10 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
