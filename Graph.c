@@ -16,6 +16,7 @@ Graph* createGraph()
 {
     Graph *graph = malloc(sizeof(Graph));
     graph->vertices = createLinkedList();
+    graph->count = 0;
     return graph;
 }
 
@@ -38,6 +39,7 @@ void addVertex( Graph* graph, char addLabel[], void* addValue, char valueType )
         newVertex->visited = FALSE;
 
         insertLast( graph->vertices, newVertex, valueType );
+        graph->count++;
     }
     else
         printf("Vertex \"%s\" already exist\n", addLabel);

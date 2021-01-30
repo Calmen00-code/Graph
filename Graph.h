@@ -2,12 +2,22 @@
 #define GRAPH
 
 #include "LinkedList.h"
-#include "GraphVertex.h"
+#include "header.h"
 
 typedef struct Graph
 {
     LinkedList *vertices;
+    int count;
 } Graph;
+
+typedef struct GraphVertex
+{
+    LinkedList *adjList;
+    char label[STR];
+    void *value;
+    char type;
+    int visited;
+} GraphVertex; 
 
 Graph* createGraph();
 void addVertex( Graph*, char[], void*, char );
