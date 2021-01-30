@@ -103,6 +103,7 @@ GraphVertex* getVertex( Graph* graph, char getLabel[] )
 FUNCTION: isAdjacent
 IMPORT: graph (Graph Pointer), label_1 (String), label_2 (String)
 EXPORT: adjacent (Integer)
+PURPOSE: Returns TRUE if label_1 and label_2 is an adjacency vertex to each other
 */
 int isAdjacent( Graph* graph, char label_1[], char label_2[] )
 {
@@ -116,24 +117,6 @@ int isAdjacent( Graph* graph, char label_1[], char label_2[] )
 
         if ( hasAdjacent( adjList_1, label_2 ) == TRUE && hasAdjacent( adjList_2, label_1 ) == TRUE )
             adjacent = TRUE;
-        /* adjNode = adjList->head; */
-
-        /* ASSERTION: Get the adjacent vertex of vertex label_1 */
-        /*
-        while ( adjNode != NULL && adjacent == FALSE )
-        {
-            vertex = (GraphVertex*)(adjNode->data);     
-        */
-            /* Check if label_2 vertex is current vertex */
-        /*
-            if ( strcmp(vertex->label, label_2) == 0 )
-                adjacent = TRUE;
-            else    
-                adjNode = adjNode->next;    
-        */
-            /* Move to the next node if current node is not vertex label_2 */
-        /*
-        }*/
     }
     return adjacent;
 }
@@ -142,6 +125,7 @@ int isAdjacent( Graph* graph, char label_1[], char label_2[] )
 FUNCTION: hasAdjacent
 IMPORT: adjList (LinkedList), check_label (String)
 EXPORT: exist (Integer)
+PURPOSE: Returns TRUE if the vertex of check_label is existed in adjList
 */
 int hasAdjacent( LinkedList *adjList, char check_label[] )
 {
@@ -170,6 +154,7 @@ int hasAdjacent( LinkedList *adjList, char check_label[] )
 FUNCTION: getAdjacent
 IMPORT: graph (Graph Pointer), adjLabel (String)
 EXPORT: retList (LinkedList)
+PURPOSE: Get the vertex from adjLabel and use the vertex to get the adjacency list
 */
 LinkedList* getAdjacent( Graph *graph, char adjLabel[] )
 {
@@ -195,6 +180,7 @@ LinkedList* getAdjacent( Graph *graph, char adjLabel[] )
 FUNCTION: hasVertex
 IMPORT: graph (Graph Pointer), hasLabel (String)
 EXPORT: exist (Integer -> Represents Boolean)
+PURPOSE: Returns TRUE if the vertex with hasLabel is existed in the graph
 */
 int hasVertex( Graph *graph, char hasLabel[] )
 {
@@ -218,6 +204,7 @@ int hasVertex( Graph *graph, char hasLabel[] )
 FUNCTION: printAdjList
 IMPORT: adjList (LinkedList)
 EXPORT: none
+PURPOSE: Print the adjList value for a vertex
 */
 void printAdjList( LinkedList *adjList )
 {
@@ -240,6 +227,7 @@ void printAdjList( LinkedList *adjList )
 FUNCTION: setNew
 IMPORT: graph (Graph Pointer)
 EXPORT: none
+PURPOSE: Set all vertex in the graph to be UNVISITED (For Traversal)
 */
 void setNew( Graph *graph )
 {
@@ -262,6 +250,7 @@ void setNew( Graph *graph )
 FUNCTION: bfs
 IMPORT: graph (Graph Pointer)
 EXPORT: none
+PURPOSE: Breath First Search
 */
 void bfs( Graph* graph )
 {
@@ -305,6 +294,7 @@ void bfs( Graph* graph )
 FUNCTION: dfs
 IMPORT: graph (Graph Pointer)
 EXPORT: none
+PURPOSe: Depth First Search
 */
 void dfs( Graph *graph )
 {
@@ -348,6 +338,7 @@ void dfs( Graph *graph )
 FUNCTION: hasNewVertex
 IMPORT: adjList (LinkedList Pointer)
 EXPORT: hasNew (Integer)
+PURPOSE: Returns TRUE if an Adjacent List has an UNVISITED Vertex
 */
 int hasNewVertex( LinkedList *adjList )
 {
@@ -459,6 +450,7 @@ void displayAsList( Graph *graph )
 FUNCTION: getNewVertex
 IMPORT: adjList (LinkedList Pointer)
 EXPORT: newVertex (GraphVertex Pointer)
+PURPOSE: Get the next UNVISITED Vertex in the Adjacency List IMPORTED
 */
 GraphVertex* getNewVertex( LinkedList *adjList )
 {
@@ -481,6 +473,7 @@ GraphVertex* getNewVertex( LinkedList *adjList )
 FUNCTION: freeGraph
 IMPORT: graph (Graph Pointer)
 EXPORT: none
+PURPOSE: Free all the graph after used
 */
 void freeGraph( Graph *graph )
 {
@@ -505,6 +498,8 @@ void freeGraph( Graph *graph )
 FUNCTION: freeReadGraph
 IMPORT: graph (Graph Pointer)
 EXPORT: none
+PURPOSE: Free the graph that was read from the file 
+         Because the value of the graph was allocated instead of defined in GraphTest.c
 */
 void freeReadGraph( Graph *graph )
 {
