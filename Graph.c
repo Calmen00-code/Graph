@@ -65,10 +65,12 @@ void addEdge( Graph *graph, char label_1[], char label_2[] )
         vertex_2 = getVertex( graph, label_2 );
 
         /* Store vertex_2 in the linked list of vertex_1 */
-        insertLast( vertex_1->adjList, vertex_2, vertex_2->type );    
+        if ( isAdjacent( graph, label_1, label_2 ) == FALSE )
+            insertLast( vertex_1->adjList, vertex_2, vertex_2->type );    
 
         /* Store vertex_1 in the linked list of vertex_2 */
-        insertLast( vertex_2->adjList, vertex_1, vertex_1->type );    
+        if ( isAdjacent( graph, label_2, label_1 ) == FALSE )
+            insertLast( vertex_2->adjList, vertex_1, vertex_1->type );    
         
         graph->edge_count++;
     }
@@ -96,6 +98,73 @@ GraphVertex* getVertex( Graph* graph, char getLabel[] )
         theVertex = (GraphVertex *)(listNode->data);
     }
     return theVertex;
+}
+
+/*
+FUNCTION: isAdjacent
+IMPORT: graph (Graph Pointer), label_1 (String), label_2 (String)
+EXPORT: adjacent (Integer)
+*/
+int isAdjacent( Graph* graph, char label_1[], char label_2[] )
+{
+    LinkedList *adjList_1 = NULL, *adjList_2 = NULL;
+    int adjacent = FALSE;
+
+    if ( hasVertex( graph, label_1 ) == TRUE && hasVertex( graph, label_2 ) == TRUE )
+    {
+        adjList_1 = getAdjacent( graph, label_1 );
+        adjList_2 = getAdjacent( graph, label_2 );
+
+        if ( hasAdjacent( adjList_1, label_2 ) == TRUE && hasAdjacent( adjList_2, label_1 ) == TRUE )
+            adjacent = TRUE;
+        /* adjNode = adjList->head; */
+
+        /* ASSERTION: Get the adjacent vertex of vertex label_1 */
+        /*
+        while ( adjNode != NULL && adjacent == FALSE )
+        {
+            vertex = (GraphVertex*)(adjNode->data);     
+        */
+            /* Check if label_2 vertex is current vertex */
+        /*
+            if ( strcmp(vertex->label, label_2) == 0 )
+                adjacent = TRUE;
+            else    
+                adjNode = adjNode->next;    
+        */
+            /* Move to the next node if current node is not vertex label_2 */
+        /*
+        }*/
+    }
+    return adjacent;
+}
+
+/*
+FUNCTION: hasAdjacent
+IMPORT: adjList (LinkedList), check_label (String)
+EXPORT: exist (Integer)
+*/
+int hasAdjacent( LinkedList *adjList, char check_label[] )
+{
+    LinkedListNode *adjNode = NULL;
+    GraphVertex *adjVertex = NULL;
+    int exist = FALSE;
+    adjNode = adjList->head;
+
+    /* ASSERTION: Traverse through the adjacent list and 
+                  check if check_label exist in adjacent vertex */
+    while ( adjNode != NULL && exist == FALSE )
+    {
+        adjVertex = (GraphVertex *)(adjNode->data);
+    
+        /* Stop the loop if current vertex label is the check_label */
+        if ( strcmp(adjVertex->label, check_label) == 0 )
+            exist = TRUE;
+        else
+            adjNode = adjNode->next;
+        /* Otherwise, continue to traverse the list */
+    }
+    return exist;
 }
 
 /*
