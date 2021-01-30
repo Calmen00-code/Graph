@@ -4,6 +4,10 @@
 #include "LinkedList.h"
 #include "header.h"
 
+/* For displayAsMatrix */
+#define ADJACENT 1
+#define NOT_ADJACENT 0
+
 typedef struct Graph
 {
     LinkedList *vertices;
@@ -31,8 +35,8 @@ LinkedList* getAdjacent( Graph*, char[] );
 int isAdjacent( Graph*, char[], char[] );
 int hasAdjacent( LinkedList*, char[] );
 void printAdjList( LinkedList* );
-void displayAsList();
-void displayAsMatrix();
+void displayAsList( Graph* );
+void displayAsMatrix( Graph* );
 void freeGraph( Graph* );
 void freeReadGraph( Graph* );
 void setNew( Graph* );

@@ -66,13 +66,12 @@ void addEdge( Graph *graph, char label_1[], char label_2[] )
 
         /* Store vertex_2 in the linked list of vertex_1 */
         if ( isAdjacent( graph, label_1, label_2 ) == FALSE )
+        {
             insertLast( vertex_1->adjList, vertex_2, vertex_2->type );    
-
-        /* Store vertex_1 in the linked list of vertex_2 */
-        if ( isAdjacent( graph, label_2, label_1 ) == FALSE )
             insertLast( vertex_2->adjList, vertex_1, vertex_1->type );    
-        
-        graph->edge_count++;
+
+            graph->edge_count++;
+        }
     }
 }
 
@@ -367,6 +366,93 @@ int hasNewVertex( LinkedList *adjList )
         listNd = listNd->next;
     }
     return hasNew;
+}
+
+/*
+FUNCTION: displayAsMatrix
+IMPORT: graph (Graph Pointer)
+EXPORT: none
+*/
+void displayAsMatrix( Graph *graph )
+{   
+    LinkedList *rowList = NULL, *colList = NULL;
+    LinkedListNode *rowNode = NULL, *colNode = NULL;
+    GraphVertex *rowVertex = NULL, *colVertex = NULL;
+
+    rowList = graph->vertices;
+    colList = graph->vertices;
+
+    colNode = colList->head;
+
+    printf("\t");
+    /* Print column label */
+    while ( colNode != NULL )
+    {
+        colVertex = (GraphVertex *)(colNode->data);
+        printf("%s\t", colVertex->label);
+        colNode = colNode->next;
+    }
+    printf("\n");
+    
+    rowNode = rowList->head;
+
+    /* Print row label */
+    while ( rowNode != NULL )
+    {
+        rowVertex = (GraphVertex *)(rowNode->data);
+        printf("%s\t", rowVertex->label);
+
+        colNode = colList->head;
+
+        /* Verify if the current vertex is an adjacent vertex to other vertex in the list */
+        while ( colNode != NULL )
+        {
+            colVertex = (GraphVertex *)(colNode->data);
+            if ( isAdjacent( graph, rowVertex->label, colVertex->label ) == TRUE )
+                printf("%d\t", ADJACENT);
+            else
+                printf("%d\t", NOT_ADJACENT); 
+
+            colNode = colNode->next;
+        }    
+        printf("\n");
+        rowNode = rowNode->next;
+    }
+}
+
+/*
+FUNCTION: displayAsList
+IMPORT: graph (Graph Pointer)
+EXPORT: none
+*/
+void displayAsList( Graph *graph )
+{
+    LinkedList *theList = NULL, *adjacentList = NULL;
+    LinkedListNode *theNode = NULL, *adjNode = NULL;
+    GraphVertex *vertex = NULL, *v = NULL;
+
+    theList = graph->vertices;
+    theNode = theList->head;
+
+    /* Traverse through the outermost list */
+    while ( theNode != NULL )
+    {
+        vertex = (GraphVertex *)(theNode->data);    /* Vertex from outermost list */
+        printf("%s: ", vertex->label);
+
+        adjacentList = vertex->adjList;
+        adjNode = adjacentList->head;
+
+        /* Traverse through the inner list (Adjacent List) */
+        while ( adjNode != NULL )
+        {
+            v = (GraphVertex *)(adjNode->data);
+            printf("%s ", v->label);
+            adjNode = adjNode->next; 
+        }
+        printf("\n");
+        theNode = theNode->next;
+    }
 }
 
 /*

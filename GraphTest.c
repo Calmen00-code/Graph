@@ -144,6 +144,18 @@ int main(int argc, char *argv[])
 /* ====================================================== */
 
     printf("\n======================================\n");
+    printf("TEST Display As List:\n\n"); 
+    displayAsList( graph ); 
+
+/* ====================================================== */
+
+    printf("\n======================================\n");
+    printf("TEST Display As Matrix:\n\n"); 
+    displayAsMatrix( graph ); 
+
+/* ====================================================== */
+
+    printf("\n======================================\n");
     printf("TEST Add Existing Vertex\n\n");
  
     printf("A: ");
@@ -333,11 +345,10 @@ int main(int argc, char *argv[])
     addEdge( graph_2, "E", "G" );
     addEdge( graph_2, "F", "G" );
     printf("Edge Count: ");
-    if ( graph->edge_count == 10 )
+    if ( graph_2->edge_count == 10 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
-    printf("%d\n", graph->edge_count);
     printf("BFS: ");
     bfs( graph_2 );
     printf("\n");
@@ -356,7 +367,7 @@ int main(int argc, char *argv[])
     addVertex( graph_3, "H", &H, 'c' );
     addVertex( graph_3, "I", &I, 'c' );
     printf("Vertex Count: ");
-    if ( graph_3->vertex_count == 10 )
+    if ( graph_3->vertex_count == 9 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
@@ -449,7 +460,7 @@ int main(int argc, char *argv[])
     addEdge( graph_2, "E", "G" );
     addEdge( graph_2, "F", "G" );
     printf("Edge Count: ");
-    if ( graph->edge_count == 10 )
+    if ( graph_2->edge_count == 10 )
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
@@ -520,7 +531,6 @@ int main(int argc, char *argv[])
         printf("%sPASSED%s\n", GRN, RESET);
     else
         printf("%sFAILED%s\n", RED, RESET);
-    printf("%d\n", graph->edge_count);
 
     printf("BFS: ");
     bfs( graph );
